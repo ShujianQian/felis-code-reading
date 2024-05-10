@@ -837,9 +837,16 @@ void Loader<LoaderType::Order>::DoLoad()
 
 }
 
+#ifdef CARACAL_TPCC_NP
+static constexpr int kTPCCTxnMix[] = {
+    50, 50, 0, 0, 0
+};
+#else
 static constexpr int kTPCCTxnMix[] = {
   45, 43, 4, 4, 4
 };
+#endif
+
 
 felis::BaseTxn *Client::CreateTxn(uint64_t serial_id)
 {

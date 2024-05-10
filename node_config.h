@@ -47,7 +47,7 @@ class TransportBatcher {
 
   // Given a level, how many pieces we should see for each destination node?
   std::array<std::array<std::atomic_ulong, kMaxNrNode>, kMaxLevels> counters;
-  std::array<LocalMetadata *, 32> thread_local_data;
+  std::array<LocalMetadata *, 64> thread_local_data;
   friend class NodeConfiguration;
  public:
   TransportBatcher() {}
