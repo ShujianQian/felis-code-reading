@@ -41,7 +41,7 @@ for ycsb_bench in "${YCSB_BENCH[@]}"; do
         rm -f $OUTPUT_DIR/$OUTPUT_FILENAME
 
         # Run YCSB
-        $DB_EXECUTABLE -c 127.0.0.1:8989 -n host1 -w ycsb -y "${ycsb_bench}" -r "${read_type}" -XMaxNodeLimit1 -Xcpu32 -Xmem30G -XEpochSize${batch_size} -XNrEpoch5 -XVHandleBatchAppend "-XYcsbSkewFactor${alpha}" >$OUTPUT_DIR/$OUTPUT_FILENAME &
+        $DB_EXECUTABLE -c 127.0.0.1:8989 -n host1 -w ycsb -y "${ycsb_bench}" -r "${read_type}" -XMaxNodeLimit1 -Xcpu32 -Xmem30G -XEpochSize${batch_size} -XNrEpoch20 -XVHandleBatchAppend "-XYcsbSkewFactor${alpha}" >$OUTPUT_DIR/$OUTPUT_FILENAME &
 
         PID=$!
         echo -e "${GREY}Benchmark started with pid: $PID${RESET}"

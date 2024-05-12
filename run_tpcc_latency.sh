@@ -43,7 +43,7 @@ for num_warehouses in "${NUM_WAREHOUSES[@]}"; do
 
 	    # Run TPCC
 	    echo -e "${CYAN}$DB_EXECUTABLE -c 127.0.0.1:8989 -n host1 -w tpcc -XMaxNodeLimit1 -Xcpu32 -Xmem30G -XEpochSize${epoch_size} -XNrEpoch20 -XVHandleBatchAppend -XTpccWarehouses${num_warehouses} -XOnDemandSplitting${split_threshold}${RESET}"
-	    $DB_EXECUTABLE -c 127.0.0.1:8989 -n host1 -w tpcc -XMaxNodeLimit1 -Xcpu32 -Xmem30G -XEpochSize${epoch_size} -XNrEpoch5 -XVHandleBatchAppend "-XTpccWarehouses${num_warehouses}" "-XOnDemandSplitting${split_threshold}" >$OUTPUT_DIR/$OUTPUT_FILENAME &
+	    $DB_EXECUTABLE -c 127.0.0.1:8989 -n host1 -w tpcc -XMaxNodeLimit1 -Xcpu32 -Xmem30G -XEpochSize${epoch_size} -XNrEpoch20 -XVHandleBatchAppend "-XTpccWarehouses${num_warehouses}" "-XOnDemandSplitting${split_threshold}" >$OUTPUT_DIR/$OUTPUT_FILENAME &
 
 	    PID=$!
 	    echo -e "${GREY}Benchmark started with pid: $PID${RESET}"
