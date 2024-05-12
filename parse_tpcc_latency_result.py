@@ -17,7 +17,7 @@ LATENCY_PATTERN = re.compile(r"Insert / Initialize / Execute (\d+) ms (\d+) ms (
 
 num_warehouses = ["1", "64"]
 epoch_sizes = [5000, 6000, 7000, 8000, 9000, 10000, 12000, 14000, 16000, 18000, 20000, 25000]
-repeat = 3
+repeat = 5
 
 
 def main(logs_dir, output_dir):

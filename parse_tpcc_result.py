@@ -15,7 +15,7 @@ root.addHandler(handler)
 THROUGHPUT_PATTERN = re.compile(r"Throughput (\d+) txn/s")
 
 num_warehouses = ["1", "2", "4", "8", "16", "32", "64"]
-repeat = 3
+repeat = 5
 
 
 def main(logs_dir, output_dir):

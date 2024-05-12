@@ -4,7 +4,7 @@ DB_EXECUTABLE=$2
 GREP_PATTERN="Ready. Waiting for run command from the controller."
 PORT=8989
 
-NUM_WAREHOUSES=("1" "2" "4" "8" "16" "32")
+NUM_WAREHOUSES=("1" "2" "4" "8" "16" "32" "64")
 
 RED="\033[31m"
 GREEN="\033[32m"
@@ -29,7 +29,7 @@ mkdir -p $OUTPUT_DIR
 START_TIME=$SECOND
 
 for num_warehouses in "${NUM_WAREHOUSES[@]}"; do
-  for repeat in {1..3}; do
+  for repeat in {1..5}; do
     echo -e "Starting execution caracal_tpcc_${num_warehouses}_${repeat}"
     OUTPUT_FILENAME="caracal_tpcc_${num_warehouses}_${repeat}.txt"
     rm -f $OUTPUT_DIR/$OUTPUT_FILENAME
@@ -40,8 +40,8 @@ for num_warehouses in "${NUM_WAREHOUSES[@]}"; do
     fi
 
     # Run TPCC
-    echo -e "${CYAN}$DB_EXECUTABLE -c 127.0.0.1:8989 -n host1 -w tpcc -XMaxNodeLimit1 -Xcpu16 -Xmem20G -XEpochSize100000 -XNrEpoch20 -XVHandleBatchAppend -XTpccWarehouses${num_warehouses} -XOnDemandSplitting${split_threshold}${RESET}"
-    $DB_EXECUTABLE -c 127.0.0.1:8989 -n host1 -w tpcc -XMaxNodeLimit1 -Xcpu16 -Xmem20G -XEpochSize100000 -XNrEpoch20 -XVHandleBatchAppend "-XTpccWarehouses${num_warehouses}" "-XOnDemandSplitting${split_threshold}" >$OUTPUT_DIR/$OUTPUT_FILENAME &
+    echo -e "${CYAN}$DB_EXECUTABLE -c 127.0.0.1:8989 -n host1 -w tpcc -XMaxNodeLimit1 -Xcpu32 -Xmem30G -XEpochSize100000 -XNrEpoch20 -XVHandleBatchAppend -XTpccWarehouses${num_warehouses} -XOnDemandSplitting${split_threshold}${RESET}"
+    $DB_EXECUTABLE -c 127.0.0.1:8989 -n host1 -w tpcc -XMaxNodeLimit1 -Xcpu32 -Xmem30G -XEpochSize100000 -XNrEpoch20 -XVHandleBatchAppend "-XTpccWarehouses${num_warehouses}" "-XOnDemandSplitting${split_threshold}" >$OUTPUT_DIR/$OUTPUT_FILENAME &
 
     PID=$!
     echo -e "${GREY}Benchmark started with pid: $PID${RESET}"

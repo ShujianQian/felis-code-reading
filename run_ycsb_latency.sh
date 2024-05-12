@@ -4,9 +4,10 @@ DB_EXECUTABLE=$2
 GREP_PATTERN="Ready. Waiting for run command from the controller."
 PORT=8989
 
-ALPHAS=("0" "20" "40" "60" "80" "90" "95" "99")
+ALPHAS=("0" "99")
 READ_TYPES=("full")
-YCSB_BENCH=("ycsba" "ycsbb" "ycsbc" "ycsbf")
+YCSB_BENCH=("ycsbf")
+BATCH_SIZES=("5000" "6000" "7000" "8000" "9000" "10000" "12000" "14000" "16000" "18000" "20000" "25000" "30000" "35000" "40000" "45000" "50000")
 
 RED="\033[31m"
 GREEN="\033[32m"
@@ -31,15 +32,16 @@ mkdir -p $OUTPUT_DIR
 START_TIME=$SECOND
 
 for ycsb_bench in "${YCSB_BENCH[@]}"; do
-  for read_type in "${READ_TYPES[@]}"; do
-    for alpha in "${ALPHAS[@]}"; do
+  for alpha in "${ALPHAS[@]}"; do
+    for batch_size in "${BATCH_SIZES[@]}"; do
+	    read_type="full"
       for repeat in {1..5}; do
-        echo -e "Starting execution caracal_${read_type}_${ycsb_bench}_${alpha}_${repeat}"
-        OUTPUT_FILENAME="caracal_${read_type}_${ycsb_bench}_${alpha}_${repeat}.txt"
+        echo -e "Starting execution caracal_${read_type}_${ycsb_bench}_${alpha}_${batch_size}_${repeat}"
+        OUTPUT_FILENAME="caracal_${read_type}_${ycsb_bench}_${alpha}_${batch_size}_${repeat}.txt"
         rm -f $OUTPUT_DIR/$OUTPUT_FILENAME
 
         # Run YCSB
-        $DB_EXECUTABLE -c 127.0.0.1:8989 -n host1 -w ycsb -y "${ycsb_bench}" -r "${read_type}" -XMaxNodeLimit1 -Xcpu32 -Xmem30G -XEpochSize100000 -XNrEpoch20 -XVHandleBatchAppend "-XYcsbSkewFactor${alpha}" >$OUTPUT_DIR/$OUTPUT_FILENAME &
+        $DB_EXECUTABLE -c 127.0.0.1:8989 -n host1 -w ycsb -y "${ycsb_bench}" -r "${read_type}" -XMaxNodeLimit1 -Xcpu32 -Xmem30G -XEpochSize${batch_size} -XNrEpoch5 -XVHandleBatchAppend "-XYcsbSkewFactor${alpha}" >$OUTPUT_DIR/$OUTPUT_FILENAME &
 
         PID=$!
         echo -e "${GREY}Benchmark started with pid: $PID${RESET}"
