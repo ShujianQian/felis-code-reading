@@ -80,7 +80,7 @@ void OSMemory::LockMemory(void *p, size_t length)
   if (mlock(p, length) < 0) {
     fprintf(stderr, "WARNING: mlock() failed\n");
     perror("mlock");
-    std::abort();
+    // std::abort();
   }
 }
 
@@ -96,7 +96,7 @@ void OSMemory::BindMemory(void *p, size_t length, int numa_node)
           1 << 0 /* MPOL_MF_STRICT */) < 0) {
     fprintf(stderr, "Fail to mbind on address %p length %lu numa_node %d\n",
             p, length, numa_node);
-    std::abort();
+    // std::abort();
   }
 }
 

@@ -24,12 +24,12 @@ static void *AllocateBuffer()
     if (syscall(__NR_mbind, p + i * 4096, 4096,
                 2, &nodemask, sizeof(long) * 8, 1) < 0) {
       perror("mbind");
-      std::abort();
+      // std::abort();
     }
   }
   if (mlock(p, 4096 * nr_zone) < 0) {
     perror("mlock");
-    std::abort();
+    // std::abort();
   }
   memset(p, 0, 4096 * nr_zone);
   return p;
