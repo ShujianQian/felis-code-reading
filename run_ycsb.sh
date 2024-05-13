@@ -33,7 +33,7 @@ START_TIME=$SECOND
 for ycsb_bench in "${YCSB_BENCH[@]}"; do
   for read_type in "${READ_TYPES[@]}"; do
     for alpha in "${ALPHAS[@]}"; do
-      for repeat in {1..5}; do
+      for repeat in {1..3}; do
         echo -e "Starting execution caracal_${read_type}_${ycsb_bench}_${alpha}_${repeat}"
         OUTPUT_FILENAME="caracal_${read_type}_${ycsb_bench}_${alpha}_${repeat}.txt"
         rm -f $OUTPUT_DIR/$OUTPUT_FILENAME

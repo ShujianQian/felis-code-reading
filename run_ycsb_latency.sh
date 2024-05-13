@@ -35,7 +35,7 @@ for ycsb_bench in "${YCSB_BENCH[@]}"; do
   for alpha in "${ALPHAS[@]}"; do
     for batch_size in "${BATCH_SIZES[@]}"; do
 	    read_type="full"
-      for repeat in {1..5}; do
+      for repeat in {1..3}; do
         echo -e "Starting execution caracal_${read_type}_${ycsb_bench}_${alpha}_${batch_size}_${repeat}"
         OUTPUT_FILENAME="caracal_${read_type}_${ycsb_bench}_${alpha}_${batch_size}_${repeat}.txt"
         rm -f $OUTPUT_DIR/$OUTPUT_FILENAME

@@ -17,7 +17,7 @@ THROUGHPUT_PATTERN = re.compile(r"Throughput (\d+) txn/s")
 alphas = ["0", "20", "40", "60", "80", "90", "95", "99"]
 workloads = ["ycsba", "ycsbb", "ycsbc", "ycsbf"]
 read_types = ["full"]
-repeat = 5
+repeat = 3
 
 def main(logs_dir, output_dir):
     logging.info(f"Parsing logs from directory {logs_dir} and saving to {output_dir}")

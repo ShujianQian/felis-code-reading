@@ -31,7 +31,7 @@ START_TIME=$SECOND
 
 for num_warehouses in "${NUM_WAREHOUSES[@]}"; do
     for epoch_size in "${BATCH_SIZES[@]}"; do
-	  for repeat in {1..5}; do
+	  for repeat in {1..3}; do
 	    echo -e "Starting execution caracal_tpcc_${num_warehouses}_${repeat}"
 	    OUTPUT_FILENAME="caracal_tpcc_${num_warehouses}_${epoch_size}_${repeat}.txt"
 	    rm -f $OUTPUT_DIR/$OUTPUT_FILENAME
